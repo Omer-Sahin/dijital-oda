@@ -59,18 +59,18 @@ export function SinemaPaneli({ acikKutu, kutuAc, kutuKapat }) {
             <div className="info-section">
               <h3>🎞️ En Sevdiğim 3 Film</h3>
               <div className="poster-gallery">
-                <img src="./assets/film_1.jpg" alt="Favori Film 1" className="gallery-image" />
-                <img src="./assets/film_2.jpg" alt="Favori Film 2" className="gallery-image" />
-                <img src="./assets/film_3.jpg" alt="Favori Film 3" className="gallery-image" />
+                <img src="/dijital-oda/assets/film_1.jpg" alt="Favori Film 1" className="gallery-image" />
+                <img src="/dijital-oda/assets/film_2.jpg" alt="Favori Film 2" className="gallery-image" />
+                <img src="/dijital-oda/assets/film_3.jpg" alt="Favori Film 3" className="gallery-image" />
               </div>
             </div>
             <hr />
             <div className="info-section">
               <h3>📺 En Sevdiğim 3 Dizi</h3>
               <div className="poster-gallery">
-                <img src="./assets/dizi_1.jpg" alt="Favori Dizi 1" className="gallery-image" />
-                <img src="./assets/dizi_2.jpg" alt="Favori Dizi 2" className="gallery-image" />
-                <img src="./assets/dizi_3.jpg" alt="Favori Dizi 3" className="gallery-image" />
+                <img src="/dijital-oda/assets/dizi_1.jpg" alt="Favori Dizi 1" className="gallery-image" />
+                <img src="/dijital-oda/assets/dizi_2.jpg" alt="Favori Dizi 2" className="gallery-image" />
+                <img src="/dijital-oda/assets/dizi_3.jpg" alt="Favori Dizi 3" className="gallery-image" />
               </div>
             </div>
           </div>

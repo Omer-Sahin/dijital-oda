@@ -195,10 +195,10 @@ export default function App() {
         {sesAcik ? "🔊 Ses Açık" : "🔇 Ses Kapalı"}
       </button>
 
-      <audio ref={arkaplanMuzikRef} loop><source src="./assets/ambiance.mp3" type="audio/mpeg" /></audio>
-      <audio ref={tiklamaSesRef}><source src="./assets/click.mp3" type="audio/mpeg" /></audio>
-      <audio ref={kasetMuzikRef} loop><source src="./assets/kaset.mp3" type="audio/mpeg" /></audio>
-      <audio ref={errorSesRef}><source src="./assets/error.mp3" type="audio/mpeg" /></audio>
+      <audio ref={arkaplanMuzikRef} loop><source src="/dijital-oda/assets/ambiance.mp3" type="audio/mpeg" /></audio>
+      <audio ref={tiklamaSesRef}><source src="/dijital-oda/assets/click.mp3" type="audio/mpeg" /></audio>
+      <audio ref={kasetMuzikRef} loop><source src="/dijital-oda/assets/kaset.mp3" type="audio/mpeg" /></audio>
+      <audio ref={errorSesRef}><source src="/dijital-oda/assets/error.mp3" type="audio/mpeg" /></audio>
 
       <div id="inventory-panel" className={envanterAcik ? "" : "hidden"}>
         <h3>Keşif İlerlemesi</h3>
@@ -206,14 +206,14 @@ export default function App() {
         <div className="inventory-grid">
           {['gym', 'poster', 'coding', 'gaming', 'tablet', 'mp3', 'card'].map((item) => (
             <div key={item} className={`inv-item ${!bulunanObjeler.includes(item) ? 'silhouette' : ''}`} onClick={() => kutuAc(item)}>
-              <img src={`./assets/${item === 'gym' ? 'dambil' : item === 'coding' ? 'code-icon' : item === 'gaming' ? 'game-icon' : item}.png`} alt={item} />
+              <img src={`/dijital-oda/assets/${item === 'gym' ? 'dambil' : item === 'coding' ? 'code-icon' : item === 'gaming' ? 'game-icon' : item}.png`} alt={item} />
             </div>
           ))}
         </div>
       </div>
 
       <div className="room-wrapper" id="room" ref={roomRef}>
-        <img src="./assets/bos_oda.jpg" className="room-bg" alt="Oda" />
+        <img src="/dijital-oda/assets/bos_oda.jpg" className="room-bg" alt="Oda" />
         <div id="fire-vfx"></div>
         <div id="snow-vfx"></div>
         

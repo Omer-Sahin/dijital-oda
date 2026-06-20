@@ -73,10 +73,10 @@ body::-webkit-scrollbar {
 }
 
 /* OBJELERİN YERLERİ */
-#gym { top: 62%; left: 32%; width: 4%; height: 8%; background-image: url('./assets/dambil.png'); }
+#gym { top: 62%; left: 32%; width: 4%; height: 8%; background-image: url('/dijital-oda/assets/dambil.png'); }
 #poster { 
     top: 25%; left: 36%; width: 7%; height: 8%; 
-    background-image: url('./assets/poster.png'); 
+    background-image: url('/dijital-oda/assets/poster.png'); 
     border: 2px solid #111; box-shadow: 2px 2px 10px rgba(0,0,0,0.8);
     transform: rotateY(26deg) rotateX(0deg) skewY(0deg);
 }
@@ -118,10 +118,10 @@ body::-webkit-scrollbar {
 .hidden { display: none !important; }
 
 /* Kodlama İkonu */
-#coding { top: 49%; left: 78%; width: 1%; height: 6%; background-image: url('./assets/code-icon.png'); }
+#coding { top: 49%; left: 78%; width: 1%; height: 6%; background-image: url('/dijital-oda/assets/code-icon.png'); }
 
 /* Oyun İkonu */
-#gaming { top: 46%; left: 78%; width: 1%; height: 6%; background-image: url('./assets/game-icon.png'); }
+#gaming { top: 46%; left: 78%; width: 1%; height: 6%; background-image: url('/dijital-oda/assets/game-icon.png'); }
 
 /* Tablet İkonu ve 3D Masa Açısı */
 #tablet { 
@@ -129,7 +129,7 @@ body::-webkit-scrollbar {
     left: 68%; 
     width: 5%; 
     height: 8%; 
-    background-image: url('./assets/tablet.png'); 
+    background-image: url('/dijital-oda/assets/tablet.png'); 
     transform: perspective(400px) rotateZ(-10deg) rotateX(45deg);
 }
 
@@ -144,7 +144,7 @@ body::-webkit-scrollbar {
     left: 9%; 
     width: 9%; 
     height: 6%; 
-    background-image: url('./assets/mp3.png'); 
+    background-image: url('/dijital-oda/assets/mp3.png'); 
     transform: rotateZ(20deg);
 }
 
@@ -243,7 +243,7 @@ body::-webkit-scrollbar {
 
 /* Kartvizit Yerleşimi */
 #card {
-    top: 71%; left: 94%; width: 4%; height: 5%; background-image: url('./assets/card.png'); transform: perspective(400px) rotateZ(15deg) rotateX(40deg);
+    top: 71%; left: 94%; width: 4%; height: 5%; background-image: url('/dijital-oda/assets/card.png'); transform: perspective(400px) rotateZ(15deg) rotateX(40deg);
 }
 #card:not(.active):hover { transform: perspective(400px) rotateZ(15deg) rotateX(40deg) translateY(-5px) scale(1.1); filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.8)); }
 
@@ -260,8 +260,8 @@ body::-webkit-scrollbar {
 
 #snow-vfx {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url('./assets/snow.gif'); background-size: cover; opacity: 0.7; pointer-events: none; z-index: 2; mix-blend-mode: screen; 
-    mask-type: alpha; -webkit-mask-type: alpha; -webkit-mask-image: url('./assets/snow_mask.png'); mask-image: url('./assets/snow_mask.png'); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    background-image: url('/dijital-oda/assets/snow.gif'); background-size: cover; opacity: 0.7; pointer-events: none; z-index: 2; mix-blend-mode: screen; 
+    mask-type: alpha; -webkit-mask-type: alpha; -webkit-mask-image: url('/dijital-oda/assets/snow_mask.png'); mask-image: url('/dijital-oda/assets/snow_mask.png'); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
 }
 
 .vfx-light {
