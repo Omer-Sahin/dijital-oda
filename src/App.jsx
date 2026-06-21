@@ -119,7 +119,7 @@ export default function App() {
   };
 
   // ANA SİSTEM VE KAMERA MOTORU
-  useEffect(() => {
+ useEffect(() => {
     // 1. Ses Dosyalarını Manuel Yükle (Mobil Çökmesini Önleyen Kısım)
     // Rotalar mutlak yapıldı: ./assets/ değil /dijital-oda/assets/
     seslerRef.current.ambiance = new Audio('/dijital-oda/assets/ambiance.mp3');
@@ -164,34 +164,67 @@ export default function App() {
     };
     window.addEventListener('wheel', handleWheel, { passive: false });
 
-    // 4. MÜKEMMEL MOBİL TOUCH MOTORU
+    // 4. MÜKEMMEL MOBİL TOUCH MOTORU (Tek Parmak Kaydırma + İki Parmak Zoom)
     let touchStartX = 0;
     let touchStartY = 0;
+    let baslangicPinchMesafesi = null;
+    let baslangicZoomVW = currentZoomVW;
+
     const handleTouchStart = (e) => {
       if (acikKutuRef.current || window.innerWidth >= 768) return;
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
+      
+      // Tek Parmak (Kaydırma)
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        baslangicPinchMesafesi = null;
+      } 
+      // İki Parmak (Zoom başlangıcı)
+      else if (e.touches.length === 2) {
+        baslangicPinchMesafesi = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        baslangicZoomVW = currentZoomVW;
+      }
     };
+
     const handleTouchMove = (e) => {
       if (acikKutuRef.current || window.innerWidth >= 768) return;
-      const touchX = e.touches[0].clientX;
-      const touchY = e.touches[0].clientY;
-      // Dokunma farkını hesapla
-      const dx = touchStartX - touchX;
-      const dy = touchStartY - touchY;
-      
-      // Odayı kaydır
-      window.scrollBy(dx, dy);
-      
-      // Son dokunma yerini güncelle
-      touchStartX = touchX;
-      touchStartY = touchY;
-      
+
+      // TEK PARMAK: Odayı Kaydır
+      if (e.touches.length === 1 && baslangicPinchMesafesi === null) {
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+        const dx = touchStartX - touchX;
+        const dy = touchStartY - touchY;
+        
+        window.scrollBy(dx, dy);
+        touchStartX = touchX;
+        touchStartY = touchY;
+      } 
+      // İKİ PARMAK: Odaya Yakınlaş / Uzaklaş (Pinch-to-Zoom)
+      else if (e.touches.length === 2 && baslangicPinchMesafesi !== null) {
+        const guncelPinchMesafesi = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        
+        const zoomOrani = guncelPinchMesafesi / baslangicPinchMesafesi;
+        currentZoomVW = baslangicZoomVW * zoomOrani;
+        
+        currentZoomVW = Math.max(100, Math.min(currentZoomVW, 300));
+        
+        if (roomRef.current) {
+          roomRef.current.style.width = `${currentZoomVW}vw`;
+        }
+      }
+
       // Telefonda varsayılan sayfa kaydırmasını engelle (Kritik Ayar)
       if (e.cancelable) e.preventDefault();
     };
 
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     // Temizlik
