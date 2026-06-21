@@ -151,11 +151,11 @@ export function OyunPaneli({ acikKutu, kutuAc, kutuKapat }) {
             <button onClick={(e) => { e.stopPropagation(); setAktifSekme('profil'); }} className="cyber-btn" style={{ borderColor: aktifSekme === 'profil' ? '#00ff88' : '#333', color: aktifSekme === 'profil' ? '#00ff88' : '#ffaa00' }}>🎮 Profiller</button>
           </div>
 
-          <div className="scrollable-content" style={{ textAlign: 'left' }}>
+         <div className="scrollable-content" style={{ textAlign: 'left' }}>
             {aktifSekme === 'strateji' && (
               <motion.div className="info-section" {...sekmeAnimasyonu}>
                 <h3 style={{ textAlign: 'center' }}>♟️ Strateji ve Kriz Yönetimi</h3>
-                <p>Oyun dünyasında sıfırdan bir system kurmak ve o sistemi zorlu şartlar altında hayatta tutmak en büyük tutkularımdan. Bu noktada <strong>Age of Empires II</strong>; kusursuz kaynak yönetimi, mikro/makro strateji dengesi ve yıllara meydan okuyan mimarisiyle benim için tartışmasız bir zirvedir.</p>
+                <p>Oyun dünyasında sıfırdan bir sistem kurmak ve o sistemi zorlu şartlar altında hayatta tutmak en büyük tutkularımdan. <strong>Frostpunk</strong>'ın -80 derecelik ekstrem koşullarında kaynak optimizasyonu ve kriz yönetiminin sınırlarını zorlarken, <strong>Age of Empires II</strong> ile kusursuz makro/mikro dengesini, ekonomi yönetimini ve zamanlama algoritmalarını deneyimliyorum.</p>
                 <div style={{ marginTop: '20px', padding: '15px', background: 'rgba(0,0,0,0.6)', border: '1px dashed #ff7800', borderRadius: '8px' }}>
                   <h4 style={{ color: '#ffaa00', marginBottom: '10px' }}>⚙️ AoE2: Standart Açılış Algoritması (Build Order)</h4>
                   <div style={{ height: '50px', display: 'flex', alignItems: 'center', background: '#111', padding: '10px', borderRadius: '5px', borderLeft: '3px solid #00ff88' }}>
