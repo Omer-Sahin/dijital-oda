@@ -284,6 +284,11 @@ export default function App() {
 
       {/* Karartma Overlay */}
       <div id="overlay" className={`overlay ${acikKutu ? '' : 'hidden'}`} onClick={kutuKapat}></div>
+      {/* MOBİL PASKALYA YUMURTASI (Siyah Ekranda Gezinen Köpek) */}
+      <div id="mobile-easter-egg">
+        <div className="doggy">🐕</div>
+        <p className="undertale-text" style={{ color: '#888' }}>* Burada görülecek bir şey yok...</p>
+      </div>
     </>
   );
 }
