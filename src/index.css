@@ -68,11 +68,11 @@ body::-webkit-scrollbar {
 }
 
 /* OBJELERİN YERLERİ Ve ORİJİNAL PERSPEKTİFLERİ */
-#gym { top: 62%; left: 32%; width: 4%; height: 8%; background-image: url('/dijital-oda/assets/dambil.png'); }
+#gym { top: 62%; left: 32%; width: 4%; height: 8%; background-image: url('/dijital-oda/assets/dambil.webp'); }
 
 #poster { 
     top: 25%; left: 36%; width: 7%; height: 8%; 
-    background-image: url('/dijital-oda/assets/poster.png'); 
+    background-image: url('/dijital-oda/assets/poster.webp'); 
     border: 2px solid #111; box-shadow: 2px 2px 10px rgba(0,0,0,0.8);
     transform: rotateY(26deg) rotateX(0deg) skewY(0deg);
 }
@@ -81,15 +81,15 @@ body::-webkit-scrollbar {
 }
 
 /* Kodlama İkonu */
-#coding { top: 49%; left: 78%; width: 1%; height: 6%; background-image: url('/dijital-oda/assets/code-icon.png'); }
+#coding { top: 49%; left: 78%; width: 1%; height: 6%; background-image: url('/dijital-oda/assets/code-icon.webp'); }
 
 /* Oyun İkonu */
-#gaming { top: 46%; left: 78%; width: 1%; height: 6%; background-image: url('/dijital-oda/assets/game-icon.png'); }
+#gaming { top: 46%; left: 78%; width: 1%; height: 6%; background-image: url('/dijital-oda/assets/game-icon.webp'); }
 
 /* Tablet İkonu ve 3D Masa Açısı */
 #tablet { 
     top: 52%; left: 68%; width: 5%; height: 8%; 
-    background-image: url('/dijital-oda/assets/tablet.png'); 
+    background-image: url('/dijital-oda/assets/tablet.webp'); 
     transform: perspective(400px) rotateZ(-10deg) rotateX(45deg);
 }
 #tablet:not(.active):hover {
@@ -100,7 +100,7 @@ body::-webkit-scrollbar {
 /* MP3 Çalar / Müzik Zevki */
 #mp3 { 
     top: 64%; left: 9%; width: 9%; height: 6%; 
-    background-image: url('/dijital-oda/assets/mp3.png'); 
+    background-image: url('/dijital-oda/assets/mp3.webp'); 
     transform: rotateZ(20deg);
 }
 #mp3:not(.active):hover {
@@ -111,7 +111,7 @@ body::-webkit-scrollbar {
 /* Kartvizit Yerleşimi */
 #card {
     top: 71%; left: 94%; width: 4%; height: 5%; 
-    background-image: url('/dijital-oda/assets/card.png'); 
+    background-image: url('/dijital-oda/assets/card.webp'); 
     transform: perspective(400px) rotateZ(15deg) rotateX(40deg);
 }
 #card:not(.active):hover { 

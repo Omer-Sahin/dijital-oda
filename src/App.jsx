@@ -273,7 +273,7 @@ export default function App() {
         <div className="inventory-grid">
           {['gym', 'poster', 'coding', 'gaming', 'tablet', 'mp3', 'card'].map((item) => (
             <div key={item} className={`inv-item ${!bulunanObjeler.includes(item) ? 'silhouette' : ''}`} onClick={() => kutuAc(item)}>
-              <img src={`/dijital-oda/assets/${item === 'gym' ? 'dambil' : item === 'coding' ? 'code-icon' : item === 'gaming' ? 'game-icon' : item}.png`} alt={item} />
+              <img src={`/dijital-oda/assets/${item === 'gym' ? 'dambil' : item === 'coding' ? 'code-icon' : item === 'gaming' ? 'game-icon' : item}.webp`} alt={item} />
             </div>
           ))}
         </div>
@@ -281,7 +281,7 @@ export default function App() {
 
       {/* Oda ve Eşyalar */}
       <div className="room-wrapper" id="room" ref={roomRef} style={{ width: window.innerWidth < 768 ? '100vw' : '150vw' }}>
-        <img src="/dijital-oda/assets/bos_oda.jpg" className="room-bg" alt="Oda" />
+        <img src="/dijital-oda/assets/bos_oda.webp" className="room-bg" alt="Oda" />
         <div id="fire-vfx"></div>
         <div id="snow-vfx"></div>
         

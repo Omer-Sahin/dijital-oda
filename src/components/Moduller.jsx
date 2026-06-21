@@ -448,7 +448,7 @@ export function KartvizitPaneli({ acikKutu, kutuAc, kutuKapat, kilitliMi, hataSe
             <div className="contact-buttons">
               <a href="https://github.com/Omer-Sahin" target="_blank" rel="noreferrer" className="contact-btn">🌐 GitHub Profili</a>
               <a href="mailto:omer.sahin.ceng@gmail.com" className="contact-btn">✉️ E-Posta Gönder</a>
-              <a href="#" target="_blank" rel="noreferrer" className="contact-btn">💼 LinkedIn</a>
+              <a href="https://www.linkedin.com/in/%C3%B6mer-%C5%9Fahin-042706418" target="_blank" rel="noreferrer" className="contact-btn">💼 LinkedIn</a>
             </div>
           </motion.div>
         )}
