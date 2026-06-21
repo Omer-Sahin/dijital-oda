@@ -275,81 +275,99 @@ export function TabletPaneli({ acikKutu, kutuAc, kutuKapat }) {
   );
 }
 
-export function MuzikPaneli({ acikKutu, kutuAc, kutuKapat, kasetCaliyor, kasetGecis, kasetMuzikRef }) {
+// GÜNCELLENEN MUZIK PANELI: Çubukların kaybolma hatası çözüldü
+export function MuzikPaneli({ acikKutu, kutuAc, kutuKapat, kasetCaliyor, kasetGecis, kasetSesNesnesi }) {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
 
+  // ANA SPEKTRUM MOTORU (Kalıcı ve Hata Dayanıklı)
   useEffect(() => {
-    let drawLoopActive = true;
+    let loopAktif = true;
 
-    if (kasetCaliyor && kasetMuzikRef.current) {
-      try {
-        if (!window.audioGraphInstance) {
+    const spektrumuCiz = () => {
+      // 1. Temel Kontroller
+      if (!loopAktif || !canvasRef.current || !kasetCaliyor || !kasetSesNesnesi) return;
+      animationRef.current = requestAnimationFrame(spektrumuCiz);
+
+      // 2. Global Ses Motorunu Kur (Sadece Bir Kez Çalışır)
+      if (!window.sabitSesSpektrumu) {
+        try {
           const AudioContext = window.AudioContext || window.webkitAudioContext;
           const ctx = new AudioContext();
+          
+          // Ses Analizörü
           const analyser = ctx.createAnalyser();
-          analyser.fftSize = 64;
+          analyser.fftSize = 64; // Çubuk sayısı (Daha az, daha performanslı)
 
-          const source = ctx.createMediaElementSource(kasetMuzikRef.current);
+          // Kaynak (Kaset ses nesnesi)
+          // ÖNEMLİ: Kaset nesnesini sadece bir kez bağlıyoruz
+          const source = ctx.createMediaElementSource(kasetSesNesnesi);
           source.connect(analyser);
           analyser.connect(ctx.destination);
 
-          window.audioGraphInstance = { ctx, analyser, source };
+          // Motoru global hafızaya kaydet
+          window.sabitSesSpektrumu = { ctx, analyser, source, dataArray: new Uint8Array(analyser.frequencyBinCount) };
+          console.log("Ses spektrum motoru kalıcı olarak kuruldu.");
+        } catch (e) {
+          console.warn("Ses motoru kurulamadı (Kaset çalar bağlı değil):", e);
+          return;
         }
-
-        if (window.audioGraphInstance.ctx.state === 'suspended') {
-          window.audioGraphInstance.ctx.resume();
-        }
-
-        const analyser = window.audioGraphInstance.analyser;
-        const bufferLength = analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-        
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-
-        const draw = () => {
-          if (!drawLoopActive || !canvasRef.current) return;
-          animationRef.current = requestAnimationFrame(draw);
-
-          analyser.getByteFrequencyData(dataArray);
-
-          ctx.fillStyle = '#0a0a0a';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-          const barWidth = (canvas.width / bufferLength) * 1.4;
-          let barHeight;
-          let x = 0;
-
-          for (let i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i] / 1.6;
-            if (barHeight > 0) {
-              const gradient = ctx.createLinearGradient(0, canvas.height, 0, canvas.height - barHeight);
-              gradient.addColorStop(0, '#ff5500');
-              gradient.addColorStop(0.5, '#ff7800');
-              gradient.addColorStop(1, '#ffaa00');
-              ctx.fillStyle = gradient;
-              ctx.fillRect(x, canvas.height - barHeight, barWidth - 3, barHeight);
-            }
-            x += barWidth;
-          }
-        };
-
-        draw();
-
-      } catch (error) {
-        console.warn("Ses zırhı:", error);
       }
+
+      // 3. Çizim Başlangıcı
+      const canvas = canvasRef.current;
+      const ctx2d = canvas.getContext('2d');
+      const { analyser, dataArray } = window.sabitSesSpektrumu;
+      const bufferLength = analyser.frequencyBinCount;
+
+      // Ses verilerini al
+      analyser.getByteFrequencyData(dataArray);
+
+      // Canvası temizle
+      ctx2d.fillStyle = '#0a0a0a';
+      ctx2d.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Çubukları çiz
+      const barWidth = (canvas.width / bufferLength) * 1.5;
+      let barHeight;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        // Yüksekliği ses şiddetine göre hesapla
+        barHeight = dataArray[i] / 1.6;
+        if (barHeight > 0) {
+          // Renk geçişi (Turuncudan Sarıya)
+          const gradient = ctx2d.createLinearGradient(0, canvas.height, 0, canvas.height - barHeight);
+          gradient.addColorStop(0, '#ff5500');
+          gradient.addColorStop(0.5, '#ff7800');
+          gradient.addColorStop(1, '#ffaa00');
+          ctx2d.fillStyle = gradient;
+          
+          // Çubuğu çiz
+          ctx2d.fillRect(x, canvas.height - barHeight, barWidth - 3, barHeight);
+        }
+        x += barWidth;
+      }
+    };
+
+    // Panel açıksa ve kaset çalıyorsa çizime başla
+    if (acikKutu === 'mp3' && kasetCaliyor) {
+      // Eğer AudioContext kapalıysa (mobil engel), açılmasını dene
+      if (window.sabitSesSpektrumu && window.sabitSesSpektrumu.ctx.state === 'suspended') {
+        window.sabitSesSpektrumu.ctx.resume();
+      }
+      requestAnimationFrame(spektrumuCiz);
     } else {
+      // Değilse çizim döngüsünü durdur
       cancelAnimationFrame(animationRef.current);
     }
 
+    // Temizlik Motoru
     return () => {
-      drawLoopActive = false;
+      loopAktif = false;
       cancelAnimationFrame(animationRef.current);
     };
-  }, [kasetCaliyor, kasetMuzikRef]);
+  }, [acikKutu, kasetCaliyor, kasetSesNesnesi]);
 
   return (
     <div className={`morph-object ${acikKutu === 'mp3' ? 'active' : ''}`} id="mp3" onClick={() => acikKutu !== 'mp3' && kutuAc('mp3')}>
@@ -367,6 +385,7 @@ export function MuzikPaneli({ acikKutu, kutuAc, kutuKapat, kasetCaliyor, kasetGe
               <p className="undertale-text">*Yatağın üzerinde eski bir kasetçalar duruyor...</p>
               <p className="undertale-text" style={{ color: '#ffaa00' }}>* Bir kaset takılı. Bunu çalmak ister misin?</p>
               
+              {/* Çubukların Çizildiği Alan */}
               <div style={{ width: '100%', display: kasetCaliyor ? 'flex' : 'none', justifyContent: 'center', margin: '20px 0 10px 0' }}>
                 <canvas ref={canvasRef} width={300} height={100} style={{ background: '#0a0a0a', borderRadius: '6px', border: '1px solid rgba(255,120,0,0.3)' }} />
               </div>

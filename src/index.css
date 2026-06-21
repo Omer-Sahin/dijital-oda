@@ -1,10 +1,38 @@
-/* --- HİLE KORUMASI: Seçme ve Sürüklemeyi Engelleme --- */
+
 /* --- HİLE KORUMASI: Seçme ve Sürüklemeyi Engelleme --- */
 body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+/* Mobil Uyumlu Ana Taşıyıcı */
+body {
+  overflow: hidden; /* Sayfanın kendisi kaymasın, odayı biz kaydıracağız */
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+/* Odanın bulunduğu ana sarıcı */
+.room-wrapper {
+  position: relative;
+  height: 100vh; /* Yükseklik tam ekran olsun */
+  /* Genişlik App.jsx'ten (100vw veya 150vw) ayarlanacak */
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* Kar ve Ateş Efektlerinin Odaya Sabitlenmesi */
+#fire-vfx, #snow-vfx {
+    position: absolute; /* fixed'den absolute'a çekildi */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10; /* Odadan üstte, eşyalardan altta */
 }
 
 .room-bg {
